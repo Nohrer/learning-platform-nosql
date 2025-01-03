@@ -13,6 +13,5 @@ async function findOneById(collection, id) {
 // Export des services
 module.exports = {
   findOneById,
-  ObjectId,
   // TODO: Exporter les fonctions utilitaires
 };
