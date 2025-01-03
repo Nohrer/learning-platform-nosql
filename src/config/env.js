@@ -1,5 +1,5 @@
 // Question: Pourquoi est-il important de valider les variables d'environnement au démarrage ?
-// Réponse : 
+// Réponse : les variables d'environnement sont essentielles pour le bon fonctionnement de l'application
 // Question: Que se passe-t-il si une variable requise est manquante ?
 // Réponse : 
 
@@ -14,8 +14,20 @@ const requiredEnvVars = [
 
 // Validation des variables d'environnement
 function validateEnv() {
-  // TODO: Implémenter la validation
-  // Si une variable manque, lever une erreur explicative
+  const envVariables = requiredEnvVars.filter(envVar => !process.env[envVar]);
+
+  if (envVariables.length > 0) {
+    throw new Error(
+      `Les variables d'environnement suivantes sont manquantes : ${envVariables.join(', ')}`
+    );
+  }
+}
+
+try {
+  validateEnv();
+} catch (error) {
+  console.error(error.message);
+  process.exit(1); // Arrêter l'application si des variables manquent
 }
 
 module.exports = {
