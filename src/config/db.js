@@ -2,6 +2,7 @@
 // Réponse : pour séparer les responsabilités et faciliter la gestion des connexions et faciliter la maintenance
 // Question : Comment gérer proprement la fermeture des connexions ?
 // Réponse : Entourer les connexions par un try/catch et fermer les connexions dans un bloc finally
+
 require('dotenv').config();
 const { MongoClient } = require('mongodb');
 const redis = require('redis');
