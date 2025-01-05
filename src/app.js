@@ -1,6 +1,6 @@
 // Question: Comment organiser le point d'entrée de l'application ?
 // Question: Quelle est la meilleure façon de gérer le démarrage de l'application ?
-
+require('dotenv').config();
 const express = require('express');
 const config = require('./config/env');
 const db = require('./config/db');
@@ -10,14 +10,18 @@ const studentRoutes = require('./routes/studentRoutes');
 
 const app = express();
 
+
 app.use(express.json());
 app.use('/courses', courseRoutes);
+app.use('/students', studentRoutes);
+
+
 async function startServer() {
   try {
     await db.connectMongo();
     await db.connectRedis();
 
-    const port = config.port;
+    const port = config.port || 3000;
     app.listen(port, () => {
       console.log(`Server running on port ${port}`);
     });

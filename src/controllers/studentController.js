@@ -3,40 +3,55 @@ const db = require('../config/db');
 const mongoService = require('../services/mongoService');
 const redisService = require('../services/redisService');
 
-async function createCourse(req, res) {
-    
+async function createStudent(req, res) {
     try {
-        const course = req.body;
-        const result = await mongoService.insertOne(db.db.collection('courses'), course);
+        const student = req.body;
+        const result = await mongoService.insertOne(db.db.collection('students'), student);
         res.status(201).json(result);
     } catch (error) {
-        res.status(500).json({ error: 'Erreur lors de la création du cours.' });
+        res.status(500).json({ error: 'Erreur lors de la création de l\'étudiant.' });
     }
-    }
-
-async function getCourse(req, res) { 
-    try { 
-        const cachedCourse = await redisService.get(`course:${req.params.id}`);
-        if (cachedCourse) {
-             return res.json(JSON.parse(cachedCourse)); 
-            } 
-        const course = await mongoService.findOneById( db.db.collection('courses'), req.params.id );
-        if (!course) { 
-            return res.status(404).json({ error: 'Cours non trouvé.' }); 
-        } 
-        await redisService.set(`course:${req.params.id}`, JSON.stringify(course)); 
-        res.json(course); 
-        } 
-    catch (error) {
-         res.status(500).json({ error: 'Erreur lors de la récupération du cours.' });
-    }     
 }
-async function getCourseStats(req, res) {
+async function getStudent(req, res) {
     try {
-        // Example: Fetch aggregated course statistics
-        const stats = await db.db.collection('courses').aggregate([
-        { $group: { _id: null, count: { $sum: 1 } } },
+        const studentId = req.params.id;
+        const cacheKey = `student:${studentId}`;
+
+        // Check if the student is in Redis cache
+        const cachedData = await redisService.getData(redisClient, cacheKey);
+        if (cachedData) {
+            return res.json(JSON.parse(cachedData));
+        }
+
+        // If not in cache, fetch from MongoDB
+        const student = await mongoService.findOneById(db.db.collection('students'), studentId);
+        if (!student) {
+            return res.status(404).json({ error: 'Étudiant non trouvé.' });
+        }
+
+        // Cache the result
+        await redisService.cacheData(redisClient, cacheKey, student, 3600); // Cache for 1 hour
+        res.json(student);
+    } catch (error) {
+        res.status(500).json({ error: 'Erreur lors de la récupération de l\'étudiant.' });
+    }
+}
+async function getStudentStats(req, res) {
+    try {
+        const cacheKey = 'studentStats';
+
+        // Check if stats are in Redis cache
+        const cachedStats = await redisService.getData(redisClient, cacheKey);
+        if (cachedStats) {
+            return res.json(JSON.parse(cachedStats));
+        }
+
+        // Compute stats and cache the result
+        const stats = await db.db.collection('students').aggregate([
+            { $group: { _id: null, count: { $sum: 1 } } },
         ]).toArray();
+
+        await redisService.cacheData(redisClient, cacheKey, stats, 3600); // Cache for 1 hour
         res.json(stats);
     } catch (error) {
         res.status(500).json({ error: 'Erreur lors de la récupération des statistiques.' });
@@ -44,7 +59,7 @@ async function getCourseStats(req, res) {
 }
 
 module.exports = {
-    createCourse,
-    getCourse,
-    getCourseStats,
-}
+    createStudent,
+    getStudent,
+    getStudentStats,
+};
