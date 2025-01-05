@@ -3,8 +3,7 @@
 // Question: Que se passe-t-il si une variable requise est manquante ?
 // Réponse : L'application ne pourra pas démarrer correctement et affichera une erreur
 
-const dotenv = require('dotenv');
-dotenv.config();
+require('dotenv').config();
 
 const requiredEnvVars = [
   'MONGODB_URI',

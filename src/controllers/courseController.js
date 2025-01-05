@@ -24,14 +24,17 @@ async function getCourse(req, res) {
     const courseId = req.params.id;
     const cacheKey = `course:${courseId}`;
 
+    // Convert the courseId to ObjectId
+    const objectId = ObjectId(courseId);
+
     // Check if the course is in Redis cache
     const cachedData = await redisService.getData(redisClient, cacheKey);
     if (cachedData) {
       return res.json(JSON.parse(cachedData));
     }
 
-    // If not in cache, fetch from MongoDB
-    const course = await mongoService.findOneById(db.db.collection('courses'), courseId);
+    // Fetch course from MongoDB using ObjectId
+    const course = await mongoService.findOneById(db.db.collection('courses'), objectId);
     if (!course) {
       return res.status(404).json({ error: 'Cours non trouvé.' });
     }
@@ -43,6 +46,7 @@ async function getCourse(req, res) {
     res.status(500).json({ error: 'Erreur lors de la récupération du cours.' });
   }
 }
+
 
 
 async function getCourseStats(req, res) {
