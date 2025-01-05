@@ -36,6 +36,19 @@ async function getStudent(req, res) {
         res.status(500).json({ error: 'Erreur lors de la récupération de l\'étudiant.' });
     }
 }
+async function updateStudent(req, res) {
+    try {
+        const studentId = req.params.id;
+        const student = req.body;
+        const result = await db.db.collection('students').updateOne({ _id: ObjectId(studentId) }, { $set: student });
+        if (result.matchedCount === 0) {
+            return res.status(404).json({ error: 'Étudiant non trouvé.' });
+        }
+        res.json({ message: 'Étudiant mis à jour avec succès.' });
+    } catch (error) {
+        res.status(500).json({ error: 'Erreur lors de la mise à jour de l\'étudiant.' });
+    }
+}
 async function getStudentStats(req, res) {
     try {
         const cacheKey = 'studentStats';
@@ -61,5 +74,6 @@ async function getStudentStats(req, res) {
 module.exports = {
     createStudent,
     getStudent,
+    updateStudent,
     getStudentStats,
 };

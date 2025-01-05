@@ -7,3 +7,5 @@ router.post('/create', studentController.createStudent);
 router.get('/:id', studentController.getStudent);
 router.put('/:id', studentController.updateStudent);
 router.get('/stats', studentController.getStudentStats);
+
+module.exports = router;
