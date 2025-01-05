@@ -17,7 +17,6 @@ async function updateOne(collection, id, data) {
   return await collection.updateOne({ _id: ObjectId(id) }, { $set: data });
 }
 
-as
 // Export des services
 module.exports = {
   findOneById,

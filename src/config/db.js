@@ -47,5 +47,7 @@ module.exports = {
   connectMongo,
   connectRedis,
   closeConnections,
+  mongoClient,
+  redisClient,
   db,
 };
