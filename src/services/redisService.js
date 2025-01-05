@@ -13,10 +13,26 @@ async function cacheData(client, key, data, ttl) {
   }
 }
 
+async function getData(client, key) {
+  try {
+    return await client.get(key);
+  } catch (error) {
+    console.error('Erreur lors de la récupération des données depuis Redis :', error);
+    return null;
+  }
+}
+
+async function deleteData(client, key) {
+  try {
+    await client.del(key);
+    console.log(`Clé supprimée : ${key}`);
+  } catch (error) {
+    console.error('Erreur lors de la suppression de la clé Redis :', error);
+  }
+}
+
 module.exports = {
   cacheData,
+  getData,
+  deleteData,
 };
-  
-  module.exports = {
-cacheData,
- };

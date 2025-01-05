@@ -10,6 +10,8 @@ const studentRoutes = require('./routes/studentRoutes');
 
 const app = express();
 
+app.use(express.json());
+app.use('/courses', courseRoutes);
 async function startServer() {
   try {
     await db.connectMongo();
@@ -27,7 +29,9 @@ async function startServer() {
 
 // Gestion propre de l'arrêt
 process.on('SIGTERM', async () => {
-  // TODO: Implémenter la fermeture propre des connexions
+  console.log('Received SIGTERM. Cleaning up...');
+  await db.closeConnections();
+  process.exit(0);
 });
 
 startServer();
