@@ -12,10 +12,13 @@ const app = express();
 
 async function startServer() {
   try {
-    // TODO: Initialiser les connexions aux bases de données
-    // TODO: Configurer les middlewares Express
-    // TODO: Monter les routes
-    // TODO: Démarrer le serveur
+    await db.connectMongo();
+    await db.connectRedis();
+
+    const port = config.port;
+    app.listen(port, () => {
+      console.log(`Server running on port ${port}`);
+    });
   } catch (error) {
     console.error('Failed to start server:', error);
     process.exit(1);

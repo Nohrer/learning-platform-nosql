@@ -33,12 +33,21 @@ async function connectRedis() {
 }
 
 
-// Export des fonctions et clients
+async function closeConnections() {
+  try {
+    if (mongoClient) await mongoClient.close();
+    if (redisClient) await redisClient.quit();
+    console.log('Connexions fermées proprement.');
+  } catch (error) {
+    console.error('Erreur lors de la fermeture des connexions :', error);
+  }
+}
+
 module.exports = {
   connectMongo,
   connectRedis,
+  closeConnections,
   mongoClient,
   redisClient,
   db,
-  
 };
