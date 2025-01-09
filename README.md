@@ -35,11 +35,12 @@ npm start
 - **src/app.js**: Point d'entrée de l'application.
 
 ### Choix techniques
--**Express.js** : Utilisé pour créer le serveur web et gérer les routes.
--**MongoDB** : Base de données NoSQL pour stocker les données des cours et des étudiants.
--**Redis** : Utilisé pour le caching afin d'améliorer la performance.
--**dotenv** : Pour gérer les variables d'environnement de manière sécurisée.
--**Architecture MVC** : Séparation des responsabilités entre les modèles, les vues et les contrôleurs pour une meilleure organisation du code.
+- **Express.js** : Utilisé pour créer le serveur web et gérer les routes.
+
+- **MongoDB** : Base de données NoSQL pour stocker les données des cours et des étudiants.
+- **Redis** : Utilisé pour le caching afin d'améliorer la performance.
+- **dotenv** : Pour gérer les variables d'environnement de manière sécurisée.
+- **Architecture MVC** : Séparation des responsabilités entre les modèles, les vues et les contrôleurs pour une meilleure organisation du code.
 
 ### Réponce aux Questions:
 
