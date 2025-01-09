@@ -12,7 +12,7 @@ cd learning-platform-nosql
 npm install
 ```
 
-##### Configuration
+#### Configuration
 Configurer les variables d'environnement présent en ".env"
 ```javascript
 MONGODB_URI=mongodb://localhost:27017/learning-platform
