@@ -39,7 +39,6 @@ npm start
 
 - **MongoDB** : Base de données NoSQL pour stocker les données des cours et des étudiants.
 - **Redis** : Utilisé pour le caching afin d'améliorer la performance.
-- **dotenv** : Pour gérer les variables d'environnement de manière sécurisée.
 - **Architecture MVC** : Séparation des responsabilités entre les modèles, les vues et les contrôleurs pour une meilleure organisation du code.
 
 ### Réponce aux Questions:
