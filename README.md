@@ -43,7 +43,7 @@ npm start
 
 ### Réponce aux Questions:
 
-#### Config
+#### 1-Config
 **Pourquoi créer un module séparé pour les connexions aux bases de données ?**
 
 pour séparer les responsabilités et faciliter la gestion des connexions et faciliter la maintenance
@@ -57,7 +57,7 @@ les variables d'environnement sont essentielles pour le bon fonctionnement de l'
 
 L'application ne pourra pas démarrer correctement et affichera une erreur
 
-#### Controllers
+#### 2-Controllers
 **Quelle est la différence entre un contrôleur et une route ?**
 
 Un contrôleur contient la logique métier tandis qu'une route définit les points d'accès à l'API
@@ -65,7 +65,7 @@ Un contrôleur contient la logique métier tandis qu'une route définit les poin
 
 Pour faciliter la gestion et la maintenance du code
 
-#### Routes
+#### 3-Routes
 **Pourquoi séparer les routes dans différents fichiers ?**
 
 Les routes séparées facilitent la gestion et la maintenance du code
@@ -73,7 +73,7 @@ Les routes séparées facilitent la gestion et la maintenance du code
 
 En regroupant les routes par fonctionnalité ou par ressource
 
-#### Services
+#### 4-Services
 **Pourquoi créer des services séparés ?**
 
 Pour séparer les responsabilités et faciliter la gestion et la maintenance du code
@@ -84,14 +84,14 @@ En utilisant des clés efficaces et des stratégies de cache appropriées
 
 Utiliser des clés uniques et des noms significatifs
 
-#### App
+#### 5-App
 **Comment organiser le point d'entrée de l'application ?**
 
 Il faut initialiser les configurations, établir les connexions aux bases de données, et démarrer le serveur.
 **Quelle est la meilleure façon de gérer le démarrage de l'application ?**
 
 Utiliser des fonctions asynchrones, gérer les erreurs et fermer les connexions.
-#### .env
+#### 6-.env
 **Quelles sont les informations sensibles à ne jamais commiter ?**
 
 les informations personnelles, les clé d'accés (API,Tokens) et les mots de passe
