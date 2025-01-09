@@ -45,41 +45,57 @@ npm start
 
 #### Config
 **Pourquoi créer un module séparé pour les connexions aux bases de données ?**
+
 pour séparer les responsabilités et faciliter la gestion des connexions et faciliter la maintenance
 **Comment gérer proprement la fermeture des connexions ?**
+
 Entourer les connexions par un try/catch et fermer les connexions dans un bloc finally
 **Pourquoi est-il important de valider les variables d'environnement au démarrage ?**
+
 les variables d'environnement sont essentielles pour le bon fonctionnement de l'application
 **Que se passe-t-il si une variable requise est manquante ?**
+
 L'application ne pourra pas démarrer correctement et affichera une erreur
 
 #### Controllers
 **Quelle est la différence entre un contrôleur et une route ?**
+
 Un contrôleur contient la logique métier tandis qu'une route définit les points d'accès à l'API
 **Pourquoi séparer la logique métier des routes ?**
+
 Pour faciliter la gestion et la maintenance du code
 
 #### Routes
 **Pourquoi séparer les routes dans différents fichiers ?**
+
 Les routes séparées facilitent la gestion et la maintenance du code
 **Comment organiser les routes de manière cohérente ?**
+
 En regroupant les routes par fonctionnalité ou par ressource
 
 #### Services
 **Pourquoi créer des services séparés ?**
+
 Pour séparer les responsabilités et faciliter la gestion et la maintenance du code
 **Comment gérer efficacement le cache avec Redis ?**
+
 En utilisant des clés efficaces et des stratégies de cache appropriées
 **Quelles sont les bonnes pratiques pour les clés Redis ?**
+
 Utiliser des clés uniques et des noms significatifs
 
 #### App
 **Comment organiser le point d'entrée de l'application ?**
+
+Il faut initialiser les configurations, établir les connexions aux bases de données, et démarrer le serveur.
 **Quelle est la meilleure façon de gérer le démarrage de l'application ?**
 
+Utiliser des fonctions asynchrones, gérer les erreurs et fermer les connexions.
 #### .env
 **Quelles sont les informations sensibles à ne jamais commiter ?**
+
 les informations personnelles, les clé d'accés (API,Tokens) et les mots de passe
 **Pourquoi utiliser des variables d'environnement ?**
+
 Pour déterminer ou il faut stocker les informations sensibles et pour les protéger
 
